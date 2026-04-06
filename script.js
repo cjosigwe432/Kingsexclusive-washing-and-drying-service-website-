@@ -1,38 +1,70 @@
-// Contact form alert
-document.getElementById('contactForm').addEventListener('submit', function(e){
-  e.preventDefault();
-  alert('Thank you! We will get back to you soon.');
-  this.reset();
-});
+// LOGIN SYSTEM (Local Storage)
+function login() {
+    let user = document.getElementById("username").value;
+    let pass = document.getElementById("password").value;
 
-// Book Now Popup
-const bookPopup = document.getElementById('bookPopup');
-const bookBtn = document.getElementById('bookBtn');
-const heroBookBtn = document.getElementById('heroBookBtn');
-const closePopup = document.getElementById('closePopup');
+    if (user && pass) {
+        localStorage.setItem("user", user);
+        document.getElementById("loginPage").style.display = "none";
+        showSection("dashboard");
+        loadChart();
+    } else {
+        alert("Enter details");
+    }
+}
 
-bookBtn.addEventListener('click', () => bookPopup.style.display = 'flex');
-heroBookBtn.addEventListener('click', () => bookPopup.style.display = 'flex');
-closePopup.addEventListener('click', () => bookPopup.style.display = 'none');
-window.addEventListener('click', (e) => { if(e.target === bookPopup) bookPopup.style.display='none'; });
-
-// Book form submission
-document.getElementById('bookForm').addEventListener('submit', function(e){
-  e.preventDefault();
-  alert('Your booking has been received! We will contact you shortly.');
-  this.reset();
-  bookPopup.style.display='none';
-});
-
-// Scroll animations
-const scrollElements = document.querySelectorAll('.scroll-animate');
-const elementInView = (el, offset=0) => {
-  const elementTop = el.getBoundingClientRect().top;
-  return (elementTop <= (window.innerHeight - offset));
+// AUTO LOGIN
+window.onload = function () {
+    if (localStorage.getItem("user")) {
+        document.getElementById("loginPage").style.display = "none";
+        showSection("dashboard");
+        loadChart();
+    }
 };
-const displayScrollElement = (element) => element.classList.add('visible');
-const handleScrollAnimation = () => {
-  scrollElements.forEach(el => { if(elementInView(el, 100)) displayScrollElement(el); });
-};
-window.addEventListener('scroll', handleScrollAnimation);
-window.addEventListener('load', handleScrollAnimation);
+
+// NAVIGATION
+function showSection(id) {
+    document.querySelectorAll(".content").forEach(sec => {
+        sec.classList.add("hidden");
+    });
+    document.getElementById(id).classList.remove("hidden");
+}
+
+// LOGOUT
+function logout() {
+    localStorage.removeItem("user");
+    location.reload();
+}
+
+// DARK MODE
+function toggleTheme() {
+    document.body.classList.toggle("dark");
+}
+
+// SEARCH FUNCTION
+function searchCustomer() {
+    let input = document.getElementById("search").value.toLowerCase();
+    let rows = document.querySelectorAll("#customerTable tr");
+
+    rows.forEach((row, index) => {
+        if (index === 0) return;
+        let text = row.innerText.toLowerCase();
+        row.style.display = text.includes(input) ? "" : "none";
+    });
+}
+
+// CHART
+function loadChart() {
+    let ctx = document.getElementById('myChart');
+
+    new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ['Jan', 'Feb', 'Mar', 'Apr'],
+            datasets: [{
+                label: 'Revenue',
+                data: [1200, 1900, 3000, 2500]
+            }]
+        }
+    });
+}
