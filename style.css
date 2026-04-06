@@ -1,79 +1,91 @@
 body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background: #f4f4f4;
-  text-align: center;
+    margin: 0;
+    font-family: Arial;
+    display: flex;
+    transition: 0.3s;
 }
 
-header {
-  background: black;
-  color: white;
-  padding: 20px;
+/* Dark Mode */
+body.dark {
+    background: #121212;
+    color: white;
 }
 
-.hero {
-  padding: 50px 20px;
-  background: white;
+/* Sidebar */
+.sidebar {
+    width: 220px;
+    background: #111;
+    color: white;
+    height: 100vh;
+    padding: 20px;
 }
 
-.hero h2 {
-  font-size: 28px;
+.sidebar ul {
+    list-style: none;
+    padding: 0;
 }
 
-.btn {
-  display: inline-block;
-  margin-top: 15px;
-  padding: 10px 20px;
-  background: black;
-  color: white;
-  text-decoration: none;
-  border-radius: 5px;
+.sidebar li {
+    padding: 12px;
+    cursor: pointer;
 }
 
-.btn:hover {
-  background: gray;
+.sidebar li:hover {
+    background: #333;
 }
 
-.services {
-  padding: 30px;
+/* Main */
+.main {
+    flex: 1;
+    padding: 20px;
 }
 
+/* Login */
+.login-box {
+    max-width: 300px;
+    margin: 100px auto;
+    text-align: center;
+}
+
+/* Cards */
 .cards {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
 }
 
 .card {
-  background: white;
-  margin: 10px;
-  padding: 20px;
-  width: 250px;
-  border-radius: 8px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-  transition: 0.3s;
+    flex: 1;
+    padding: 20px;
+    background: #f4f4f4;
+    border-radius: 10px;
 }
 
-.card:hover {
-  transform: scale(1.05);
+/* Dark cards */
+body.dark .card {
+    background: #1e1e1e;
 }
 
-.price {
-  background: black;
-  color: white;
-  padding: 30px;
+/* Table */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
 }
 
-footer {
-  padding: 15px;
-  background: #222;
-  color: white;
+td, th {
+    border: 1px solid #ccc;
+    padding: 10px;
+}
+
+/* Hide */
+.hidden {
+    display: none;
 }
 
 /* Mobile */
-@media (max-width: 600px) {
-  .cards {
-    flex-direction: column;
-    align-items: center;
-  }
+@media (max-width: 768px) {
+    .sidebar {
+        display: none;
+    }
 }
