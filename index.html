@@ -2,58 +2,64 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Pro Dashboard</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ProBiz Premium</title>
 <link rel="stylesheet" href="style.css">
+    
+    <!-- Add firebase here -->
+    <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-auth.js"></script>
 
-<!-- Chart.js -->
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
+
 <body>
 
-<div class="sidebar">
-    <h2>ProPanel</h2>
-    <ul>
-        <li onclick="showSection('dashboard')">Dashboard</li>
-        <li onclick="showSection('customers')">Customers</li>
-        <li onclick="toggleTheme()">Toggle Theme</li>
-        <li onclick="logout()">Logout</li>
-    </ul>
-</div>
+<div class="app">
 
-<div class="main">
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+        <h2>ProBiz</h2>
+        <ul>
+            <li onclick="showPage('dashboard')">Dashboard</li>
+            <li onclick="showPage('profile')">Profile</li>
+            <li onclick="showPage('settings')">Settings</li>
+            <li onclick="logout()">Logout</li>
+        </ul>
+    </aside>
 
-<!-- LOGIN -->
-<div id="loginPage" class="login-box">
-    <h2>Login</h2>
-    <input type="text" id="username" placeholder="Username">
-    <input type="password" id="password" placeholder="Password">
-    <button onclick="login()">Login</button>
-</div>
+    <!-- MAIN -->
+    <main class="main">
 
-<!-- DASHBOARD -->
-<div id="dashboard" class="content hidden">
-    <h1>Dashboard</h1>
+        <!-- TOP BAR -->
+        <div class="topbar">
+            <h3>Dashboard</h3>
+            <button onclick="toggleTheme()">🌗 Toggle</button>
+        </div>
 
-    <div class="cards">
-        <div class="card">💰 $15,200 Revenue</div>
-        <div class="card">📦 420 Orders</div>
-        <div class="card">👥 210 Customers</div>
-    </div>
+        <!-- DASHBOARD -->
+        <div id="dashboard" class="page">
+            <div class="cards">
+                <div class="card">💰 Revenue<br>$12,450</div>
+                <div class="card">📊 Sales<br>320</div>
+                <div class="card">👥 Users<br>1,200</div>
+            </div>
+        </div>
 
-    <canvas id="myChart"></canvas>
-</div>
+        <!-- PROFILE -->
+        <div id="profile" class="page hidden">
+            <h2>User Profile</h2>
+            <input type="text" placeholder="Name">
+            <input type="email" placeholder="Email">
+            <button>Save</button>
+        </div>
 
-<!-- CUSTOMERS -->
-<div id="customers" class="content hidden">
-    <h1>Customers</h1>
-    <input type="text" id="search" placeholder="Search..." onkeyup="searchCustomer()">
+        <!-- SETTINGS -->
+        <div id="settings" class="page hidden">
+            <h2>Settings</h2>
+            <p>Coming soon...</p>
+        </div>
 
-    <table id="customerTable">
-        <tr><th>Name</th><th>Email</th></tr>
-        <tr><td>John Doe</td><td>john@email.com</td></tr>
-        <tr><td>Jane Smith</td><td>jane@email.com</td></tr>
-    </table>
-</div>
+    </main>
 
 </div>
 
