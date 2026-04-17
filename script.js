@@ -1,70 +1,34 @@
-// LOGIN SYSTEM (Local Storage)
-function login() {
-    let user = document.getElementById("username").value;
-    let pass = document.getElementById("password").value;
+// SCROLL ANIMATION
+const items = document.querySelectorAll('.card, .about, .contact');
 
-    if (user && pass) {
-        localStorage.setItem("user", user);
-        document.getElementById("loginPage").style.display = "none";
-        showSection("dashboard");
-        loadChart();
-    } else {
-        alert("Enter details");
+const observer = new IntersectionObserver(entries=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting){
+      entry.target.style.opacity = 1;
+      entry.target.style.transform = "translateY(0)";
     }
-}
+  });
+});
 
-// AUTO LOGIN
-window.onload = function () {
-    if (localStorage.getItem("user")) {
-        document.getElementById("loginPage").style.display = "none";
-        showSection("dashboard");
-        loadChart();
-    }
-};
+items.forEach(el=>{
+  el.style.opacity = 0;
+  el.style.transform = "translateY(40px)";
+  observer.observe(el);
+});
 
-// NAVIGATION
-function showSection(id) {
-    document.querySelectorAll(".content").forEach(sec => {
-        sec.classList.add("hidden");
-    });
-    document.getElementById(id).classList.remove("hidden");
-}
 
-// LOGOUT
-function logout() {
-    localStorage.removeItem("user");
-    location.reload();
-}
+// EMAILJS
+document.getElementById("contact-form").addEventListener("submit", function(e){
+  e.preventDefault();
 
-// DARK MODE
-function toggleTheme() {
-    document.body.classList.toggle("dark");
-}
-
-// SEARCH FUNCTION
-function searchCustomer() {
-    let input = document.getElementById("search").value.toLowerCase();
-    let rows = document.querySelectorAll("#customerTable tr");
-
-    rows.forEach((row, index) => {
-        if (index === 0) return;
-        let text = row.innerText.toLowerCase();
-        row.style.display = text.includes(input) ? "" : "none";
-    });
-}
-
-// CHART
-function loadChart() {
-    let ctx = document.getElementById('myChart');
-
-    new Chart(ctx, {
-        type: 'bar',
-        data: {
-            labels: ['Jan', 'Feb', 'Mar', 'Apr'],
-            datasets: [{
-                label: 'Revenue',
-                data: [1200, 1900, 3000, 2500]
-            }]
-        }
-    });
-}
+  emailjs.sendForm(
+    'service_b0r2o6g',
+    'template_xinp4ii',
+    this
+  )
+  .then(function(){
+    document.getElementById("status").innerText = "Message sent successfully!";
+  }, function(error){
+    document.getElementById("status").innerText = "Failed to send message.";
+  });
+});
