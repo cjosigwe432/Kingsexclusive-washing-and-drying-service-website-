@@ -75,6 +75,9 @@ body{
   height: 100%;
   object-fit: cover;
   z-index: -1;
+   <video autoplay muted loop playsinline class="bg-video">
+    <source src="https://cdn.coverr.co/videos/coverr-washing-clothes-in-a-washing-machine-4747/1080p.mp4" type="video/mp4">
+  </video>
 }
 
 /* ABOUT */
