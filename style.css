@@ -13,7 +13,7 @@ body{
 /* HERO */
 .hero{
   height:100vh;
-  background:url('https://images.unsplash.com/photo-1581578731548-c64695cc6952') center/cover no-repeat;
+  background:https://cdn.coverr.co/videos/coverr-washing-clothes-in-a-washing-machine-4747/1080p.mp4" type="video/mp4">
   display:flex;
   justify-content:center;
   align-items:center;
@@ -75,9 +75,6 @@ body{
   height: 100%;
   object-fit: cover;
   z-index: -1;
-   <video autoplay muted loop playsinline class="bg-video">
-    <source src="https://cdn.coverr.co/videos/coverr-washing-clothes-in-a-washing-machine-4747/1080p.mp4" type="video/mp4">
-  </video>
 }
 
 /* ABOUT */
