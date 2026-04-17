@@ -3,86 +3,70 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ProBiz OTP Auth</title>
+<title>SwiftClean Laundry Services</title>
 
-<!-- ✅ Firebase (easy version) -->
-<script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth-compat.js"></script>
+<link rel="stylesheet" href="style.css">
+
+<script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+<script>
+(function(){
+  emailjs.init("SGfH4OrAtLrxeO0o0");
+})();
+</script>
 
 </head>
-
 <body>
 
-<div class="container">
-    <h2>Sign Up</h2>
-    <input type="email" id="email" placeholder="Email">
-    <input type="password" id="password" placeholder="Password">
-    <button onclick="signup()">Create Account</button>
+<!-- HERO -->
+<section class="hero">
+  <div class="overlay"></div>
+  <div class="hero-content">
+    <h1>SwiftClean Laundry Services</h1>
+    <p>Fast, Affordable & Professional Laundry Service</p>
+    <a href="https://wa.me/2349168144059" class="btn">Chat on WhatsApp</a>
+  </div>
+</section>
 
-    <h3>Login</h3>
-    <input type="email" id="loginEmail" placeholder="Email">
-    <input type="password" id="loginPassword" placeholder="Password">
-    <button onclick="login()">Login</button>
-</div>
+<!-- SERVICES -->
+<section class="services">
+  <h2>Our Services</h2>
+  <div class="cards">
+    <div class="card">Washing & Ironing</div>
+    <div class="card">Dry Cleaning</div>
+    <div class="card">Pickup & Delivery</div>
+  </div>
+</section>
 
-<!-- ✅ YOUR FIREBASE CONFIG -->
-<script>
-const firebaseConfig = {
-  apiKey: "AIzaSyDLvK-Q4v1hZ2B-mtxZzNXs5m1tCS6LdGw",
-  authDomain: "neobank-app-3ebbe.firebaseapp.com",
-  projectId: "neobank-app-3ebbe",
-  storageBucket: "neobank-app-3ebbe.firebasestorage.app",
-  messagingSenderId: "258331631270",
-  appId: "1:258331631270:web:f4eeeb8ac1e3177bb21e67",
-  measurementId: "G-9VRK9ZZXYS"
-};
+<!-- IMAGE SECTION -->
+<section class="image-section">
+  <div class="overlay"></div>
+  <h2>Clean Clothes. Fresh Confidence.</h2>
+</section>
 
-firebase.initializeApp(firebaseConfig);
-</script>
+<!-- ABOUT -->
+<section class="about">
+  <h2>About Us</h2>
+  <p>We help busy people look sharp with fast and reliable laundry services. We pick up, clean, and deliver right to your door.</p>
+</section>
 
-<!-- ✅ MAIN SCRIPT -->
-<script>
+<!-- CONTACT -->
+<section class="contact">
+  <h2>Contact Us</h2>
 
-function signup() {
-    const email = document.getElementById("email").value;
-    const password = document.getElementById("password").value;
+  <form id="contact-form">
+    <input type="text" name="user_name" placeholder="Your Name" required>
+    <input type="email" name="user_email" placeholder="Your Email" required>
+    <textarea name="message" placeholder="Your Message"></textarea>
+    <button type="submit">Send Message</button>
+  </form>
 
-    firebase.auth().createUserWithEmailAndPassword(email, password)
-    .then((userCredential) => {
+  <p id="status"></p>
+</section>
 
-        // 🔥 SEND EMAIL VERIFICATION (OTP STYLE)
-        userCredential.user.sendEmailVerification();
+<footer>
+  <p>© 2026 SwiftClean Laundry Services</p>
+</footer>
 
-        alert("Account created! Check your email to verify.");
-
-    })
-    .catch(error => {
-        alert(error.message);
-    });
-}
-
-function login() {
-    const email = document.getElementById("loginEmail").value;
-    const password = document.getElementById("loginPassword").value;
-
-    firebase.auth().signInWithEmailAndPassword(email, password)
-    .then((userCredential) => {
-
-        const user = userCredential.user;
-
-        if (user.emailVerified) {
-            alert("Login successful ✅");
-        } else {
-            alert("Please verify your email first ❌");
-        }
-
-    })
-    .catch(error => {
-        alert(error.message);
-    });
-}
-
-</script>
-
+<script src="script.js"></script>
 </body>
 </html>
