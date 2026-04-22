@@ -1,73 +1,74 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SwiftClean Laundry Services</title>
-
-<link rel="stylesheet" href="style.css">
-
-<script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
-<script>
-(function(){
-  emailjs.init("SGfH4OrAtLrxeO0o0");
-})();
-</script>
-
+  <title>My App</title>
+  <script src="https://unpkg.com/parse/dist/parse.min.js"></script>
 </head>
 <body>
 
-<!-- HERO -->
-<section class="hero">
-  <div class="overlay"></div>
-  <div class="hero-content">
-    <h1>SwiftClean Laundry Services</h1>
-    <p>Fast, Affordable & Professional Laundry Service</p>
-    <a href="https://wa.me/2349168144059" class="btn">Chat on WhatsApp</a>
-  </div>
-</section>
+<h2>Signup</h2>
+<input id="su_username" placeholder="Username"><br><br>
+<input id="su_email" placeholder="Email"><br><br>
+<input id="su_password" type="password" placeholder="Password"><br><br>
+<button onclick="signup()">Sign Up</button>
 
-<!-- SERVICES -->
-<section class="services">
-  <h2>Our Services</h2>
-  <div class="cards">
-    <div class="card">Washing & Ironing</div>
-    <div class="card">Dry Cleaning</div>
-    <div class="card">Pickup & Delivery</div>
-  </div>
+<hr>
 
-  <!-- VIDEO BACKGROUND (put it here) -->
-  <video autoplay muted loop playsinline class="bg-video">
-    <source src="https://cdn.coverr.co/videos/coverr-washing-clothes-in-a-washing-machine-4747/1080p.mp4
-  </video>
+<h2>Login</h2>
+<input id="li_username" placeholder="Username"><br><br>
+<input id="li_password" type="password" placeholder="Password"><br><br>
+<button onclick="login()">Login</button>
 
-  <!-- Your content goes here -->
-  <h1>Washing Machine Service</h1>
+<hr>
 
-<!-- ABOUT -->
-<section class="about">
-  <h2>About Us</h2>
-  <p>We help busy people look sharp with fast and reliable laundry services. We pick up, clean, and deliver right to your door.</p>
-</section>
+<h2>Dashboard</h2>
+<button onclick="getUser()">Get Current User</button>
+<p id="output"></p>
 
-<!-- CONTACT -->
-<section class="contact">
-  <h2>Contact Us</h2>
+<script>
 
-  <form id="contact-form">
-    <input type="text" name="user_name" placeholder="Your Name" required>
-    <input type="email" name="user_email" placeholder="Your Email" required>
-    <textarea name="message" placeholder="Your Message"></textarea>
-    <button type="submit">Send Message</button>
-  </form>
+// 🔥 PUT YOUR KEYS HERE
+Parse.initialize(" vxeZC8luoDFeP22Yf8ns15C0WXjrL8XekJ8cD6dQ", 
+  " p6Z1LnLBL3GC2lkEenc1bObzb8a2ySYqioplrt1k");
+Parse.serverURL = " https://parseapi.back4app.com";
 
-  <p id="status"></p>
-</section>
+// SIGNUP
+function signup() {
+  const user = new Parse.User();
 
-<footer>
-  <p>© 2026 SwiftClean Laundry Services</p>
-</footer>
+  user.set("username", document.getElementById("su_username").value);
+  user.set("password", document.getElementById("su_password").value);
+  user.set("email", document.getElementById("su_email").value);
 
-<script src="script.js"></script>
+  user.signUp()
+  .then(() => alert("Signup successful"))
+  .catch(err => alert(err.message));
+}
+
+// LOGIN
+function login() {
+  const username = document.getElementById("li_username").value;
+  const password = document.getElementById("li_password").value;
+
+  Parse.User.logIn(username, password)
+  .then(() => alert("Login successful"))
+  .catch(err => alert(err.message));
+}
+
+// GET USER
+function getUser() {
+  const user = Parse.User.current();
+
+  if (user) {
+    document.getElementById("output").innerText =
+      "Logged in as: " + user.get("username");
+  } else {
+    document.getElementById("output").innerText =
+      "No user logged in";
+  }
+}
+
+</script>
+
 </body>
 </html>
